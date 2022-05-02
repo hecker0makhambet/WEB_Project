@@ -13,9 +13,8 @@ class Product(SqlAlchemyBase, UserMixin, SerializerMixin):
                            primary_key=True, autoincrement=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    user_id = sqlalchemy.Column(sqlalchemy.ForeignKey)
+    user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     price = sqlalchemy.Column(sqlalchemy.Integer)
-    date = sqlalchemy.Column(sqlalchemy.DateTime,
-                                     default=datetime.datetime.now)
+    date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
 
-    users = orm.relation("User", back_populates='users')
+    user = orm.relation("User")

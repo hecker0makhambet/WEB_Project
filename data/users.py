@@ -19,4 +19,4 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
 
-    products = orm.relation("Product", back_populates='products')
+    products = orm.relation("Product", back_populates='user')
