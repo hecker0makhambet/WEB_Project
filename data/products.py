@@ -18,3 +18,6 @@ class Product(SqlAlchemyBase, UserMixin, SerializerMixin):
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
 
     user = orm.relation("User")
+    categories = orm.relation("Category",
+                              secondary="association",
+                              backref="products")
