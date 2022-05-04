@@ -1,8 +1,0 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>{{ product.name }}</h1>
-<p>{{ product.about }}</p>
-<a href="/user/{{ product.user.id }}">{{ product.user.name }}</a>
-<p>{{ product.price }}</p>
-<p>{{ product.date }}</p>
-{% endblock %}
