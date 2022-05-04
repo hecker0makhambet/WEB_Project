@@ -43,9 +43,54 @@ class RegisterForm(FlaskForm):
     submit = SubmitField("SIGN UP")
 
 
+def products_foo(session):
+    products = session.query(Product).filter(Product.is_private == False).all()
+    return render_template('main.html', current_user=current_user, products=products)
+
+
+def about_foo(session):
+    return render_template('about.html', current_user=current_user)
+
+
+def starred_foo(session):
+    return render_template('starred.html', current_user=current_user)
+
+
+def filter_foo(session):
+    pass
+
+
+@app.route('/user/<int:user_id>')
+def user_foo(user_id):
+    session = db_session.create_session()
+    user = session.query(User).get(user_id)
+    if current_user != user:
+        products = session.query(Product).filter(Product.is_private == False, Product.user == current_user)
+    else:
+        products = user.products
+    return render_template('user.html', current_user=current_user, user=user, products=products)
+
+
+@app.route('/product/<int:product_id>')
+def product_foo(product_id):
+    session = db_session.create_session()
+    product = session.query(Product).get(product_id)
+    return render_template('product.html', current_user=current_user, product=product)
+
+
+@app.route('/profile')
+def profile():
+    session = db_session.create_session()
+    user = session.query(User).get(current_user.id)
+    return render_template('profile.html', current_user=current_user, user=user)
+
+
 @app.route('/', methods=['POST', 'GET'])
-def main():
-    return make_response(render_template('main.html', current_user=current_user))
+@app.route('/<int:action>', methods=['POST', 'GET'])
+def main(action=1):
+    session = db_session.create_session()
+    a = {1: products_foo(session), 2: about_foo(session), 3: starred_foo(session), 4: filter_foo(session)}
+    return a[action]
 
 
 @app.route('/logout')
