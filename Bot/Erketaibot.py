@@ -1,8 +1,7 @@
 import logging
-from telegram.ext import Updater, MessageHandler, Filters ,CommandHandler
 import time
-from telegram import ReplyKeyboardMarkup
 
+from telegram.ext import Updater, CommandHandler
 
 t = time.localtime()
 data = time.asctime(t)
