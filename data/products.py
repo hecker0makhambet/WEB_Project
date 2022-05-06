@@ -16,6 +16,7 @@ class Product(SqlAlchemyBase, UserMixin, SerializerMixin):
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     price = sqlalchemy.Column(sqlalchemy.Integer)
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+    likes = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     is_private = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
 
     user = orm.relation("User")

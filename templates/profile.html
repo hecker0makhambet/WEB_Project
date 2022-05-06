@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ user.name }}</h1>
-<p>{{ user.about }}</p>
-<p>{{ user.email }}</p>
-<p>{{ user.created_date }}</p>
-<h1>Products</h1>
-{% for i in user.products %}
-<a href="/product/{{ i.id }}">{{ i.name }}</a>
-<a>{{ i.price }}</a>
-<p>{{ i.date }}</p>
-{% endfor %}
+<h1>AVATAR</h1>
+<form action="" method="post" enctype="multipart/form-data">
+{{ form.Avatar.label }}<br>
+<img {% if current_user.avatar_name != None %} src="{{ url1 }}" {% else %} src="https://avatars.mds.yandex.net/get-pdb/1996600/d1725ec1-41d3-4b2c-ab24-91ec603557bf/s375" {% endif %}
+width="500px" height="500px"><br>
+{{ form.Avatar() }}<br>
+{{ form.submit(type="submit", class="btn btn-primary") }}<br>
+<a>Name:<b>{{ current_user.name }}</b></a><br>
+<a>About:<b>{{ current_user.about }}</b></a><br>>
+<a>Email:</a><b>{{ current_user.email }}</b><br>
+<a>Date:</a><b>{{ current_user.created_date }}</b><br>
+</form>
+<form action="" method="post" enctype="multipart/form-data">
+    {{ form2.name.label }}<br>
+    {{ form2.name() }}<br>
+    {{ form2.about.label }}<br>
+    {{ form2.about() }}<br>
+    {{ form2.email.label }}<br>
+    {{ form2.email() }}<br>
+    {{ form2.submit(type="submit", class="btn btn-primary") }}<br>
+</form>
+<div>
+    <a href="/change_password">Change password</a>
+</div>
 {% endblock %}

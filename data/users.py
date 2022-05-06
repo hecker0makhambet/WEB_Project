@@ -17,8 +17,10 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     email = sqlalchemy.Column(sqlalchemy.String,
                               index=True, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    avatar_name = sqlalchemy.Column(sqlalchemy.String, default=None)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
+    # starred = orm.relation("Product")
 
     products = orm.relation("Product", back_populates='user')
 
