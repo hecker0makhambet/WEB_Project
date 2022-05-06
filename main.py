@@ -1,17 +1,14 @@
-from flask import Flask, render_template, request, redirect, jsonify, make_response, url_for
+from flask import Flask, render_template, redirect, url_for, request
+from flask_login import login_required, logout_user, current_user, LoginManager
 from flask_restful import Api
+
 import data
 from data import login, user_app, product_app
-from data.db_session import create_session, global_init
 from data import products_resource, db_session
-from data.users import User
+from data.db_session import create_session, global_init
 from data.products import Product
-from flask_login import login_required, logout_user, current_user, login_user, LoginManager
-from flask_wtf import FlaskForm
-from wtforms.validators import DataRequired
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, IntegerField, FileField
-import flask
-from data.classes import LoginForm, RegisterForm, ProductForm, ProfileForm
+from data.users import User
+
 global_init('data\\database.db')
 create_session()
 app = Flask(__name__)
@@ -53,7 +50,13 @@ def about_foo(session):
 
 
 def starred_foo(session):
-    return render_template('starred.html', current_user=current_user)
+    b = []
+    if current_user.is_authenticated:
+        products = session.query(Product).all()
+        for i in products:
+            if i.id in current_user.starred:
+                b.append(i)
+    return render_template('starred.html', current_user=current_user, products=b)
 
 
 def filter_foo(session):
@@ -71,10 +74,28 @@ def get_user(user_id):
     return render_template('user.html', current_user=current_user, user=user, products=products)
 
 
-@app.route('/product/<int:product_id>')
+@app.route('/product/<int:product_id>', methods=['POST', 'GET'])
 def get_product(product_id):  # Вывод информации о продукте
     session = db_session.create_session()
     product = session.query(Product).get(product_id)
+    if request.method == 'POST':
+        user = session.query(User).get(current_user.id)
+        print(user.name)
+        for i in session.query(User):
+            print(i.name, i.starred)
+        print(000)
+        if product.id in user.starred and user.id in product.starred:
+            user.starred.pop(user.starred.index(product.id))
+            product.starred.pop(product.starred.index(user.id))
+        else:
+            user.starred.append(product.id)
+            product.starred.append(user.id)
+            user.starred = set(user.starred)
+            user.starred = list(user.starred)
+            product.starred = set(product.starred)
+            product.starred = list(product.starred)
+        product.likes = len(product.starred)
+        session.commit()
     return render_template('product.html', current_user=current_user, product=product)
 
 
