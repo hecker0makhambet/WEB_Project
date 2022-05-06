@@ -3,24 +3,24 @@ import sys
 import os
 from flask import Flask, render_template, request, redirect, jsonify, make_response, url_for
 from flask_restful import Api
-from .db_session import create_session, global_init
-from . import products_resource
-from . import db_session
-from .users import User
-from .products import Product
+from data.db_session import create_session, global_init
+from data import products_resource
+from data import db_session
+from data.users import User
+from data.products import Product
 from flask_login import login_required, logout_user, current_user, login_user, LoginManager
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
 from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, IntegerField, FileField
-from .classes import LoginForm, RegisterForm, ProductForm, ProfileForm, AvatarForm, PasswordChangeForm
+from data.classes import LoginForm, RegisterForm, ProductForm, ProfileForm, AvatarForm, PasswordChangeForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = flask.Blueprint('blueprints', __name__, template_folder='templates')
 
 
-def mkdir(path, dir):
+def mkdir(path, direct):
     a = os.getcwd()
-    path = os.path.join(a, path, dir)
+    path = os.path.join(a, path, direct)
     if os.path.isdir(path):
         return
     os.mkdir(path)
@@ -32,7 +32,10 @@ def profile():  # Профиль текущего пользователя
     form2 = ProfileForm()
     session = db_session.create_session()
     user = session.query(User).get(current_user.id)
-    url1 = url_for('static', filename=f'images/users/{user.id}/{user.avatar_name}')
+    if user.avatar_name != None:
+        url1 = url_for('static', filename=f'images/users/{user.id}/{user.avatar_name}')
+    else:
+        url1 = "https://avatars.mds.yandex.net/get-pdb/1996600/d1725ec1-41d3-4b2c-ab24-91ec603557bf/s375"
     if form2.is_submitted():
         if form.Avatar.data:
             mkdir('static\\images\\users', str(user.id))
@@ -40,7 +43,6 @@ def profile():  # Профиль текущего пользователя
                 r.write(form.Avatar.data.read())
                 r.close()
             url1 = url_for('static', filename=f'images/users/{user.id}/{str(form.Avatar.data.filename)}')
-            # url1 = f'C:\\python\\WEB_Project\\static\\images\\prog\\{form.Avatar.data.filename}'
             user.avatar_name = form.Avatar.data.filename
         if form2.name.data:
             user.name = form2.name.data
@@ -65,7 +67,6 @@ def change_password():
     session = db_session.create_session()
     user = session.query(User).get(current_user.id)
     if form.is_submitted():
-        print(0)
         if not user.check_password(form.old_password.data):
             return render_template('password_change.html', current_user=current_user,
                                    form=form, message='Incorrect password')
@@ -75,5 +76,5 @@ def change_password():
         user.set_password(form.new_password.data)
         # user.hashed_password = generate_password_hash(form.new_password)
         session.commit()
-        render_template('password_change.html', current_user=current_user, form=form)
+        render_template('password_change.html', current_user=current_user, form=form, message="Пароль успешно изменен")
     return render_template('password_change.html', current_user=current_user, form=form)

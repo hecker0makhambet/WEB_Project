@@ -22,7 +22,8 @@ class ProductForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
     about = StringField('about', validators=[DataRequired()])
     price = IntegerField('price(KZT)', validators=[DataRequired()])
-    is_private = BooleanField('is_private', validators=[DataRequired()])
+    is_private = BooleanField('is_private')
+    Avatar = FileField('Choose avatar')
     submit = SubmitField('ADD', validators=[DataRequired()])
 
 

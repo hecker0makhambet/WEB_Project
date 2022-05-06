@@ -1,7 +1,7 @@
 import datetime
 import sqlalchemy
 from sqlalchemy import orm
-from .db_session import SqlAlchemyBase
+from data.db_session import SqlAlchemyBase
 from flask_login import UserMixin
 from sqlalchemy_serializer import SerializerMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -20,7 +20,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     avatar_name = sqlalchemy.Column(sqlalchemy.String, default=None)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
-    # starred = orm.relation("Product")
+    starred = []
 
     products = orm.relation("Product", back_populates='user')
 

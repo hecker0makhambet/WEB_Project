@@ -1,7 +1,7 @@
 import datetime
 import sqlalchemy
 from sqlalchemy import orm
-from .db_session import SqlAlchemyBase
+from data.db_session import SqlAlchemyBase
 from flask_login import UserMixin
 from sqlalchemy_serializer import SerializerMixin
 
@@ -15,9 +15,11 @@ class Product(SqlAlchemyBase, UserMixin, SerializerMixin):
     about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     price = sqlalchemy.Column(sqlalchemy.Integer)
+    avatar_name = sqlalchemy.Column(sqlalchemy.String, default=None)
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     likes = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     is_private = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
+    starred = []
 
     user = orm.relation("User")
     categories = orm.relation("Category",

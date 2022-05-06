@@ -1,3 +1,3 @@
-from . import users
-from . import products
-from . import category
+from data import users
+from data import products
+from data import category
