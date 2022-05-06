@@ -10,19 +10,25 @@
     <link rel="stylesheet" href="{{ css_url }}">
 </head>
 <body>
-<h1>Erke</h1>
-<p style="position: fixed; top: 25px; left: 100px">
+
+<div style="position: fixed; top: 25px; left: 300px">
+    <h1>Erke</h1>
     <a style="float: left; margin-right: 50px" href="/1">Products</a>
     <a style="float: left; margin-right: 50px" href="/2">About</a>
     <a style="float: left; margin-right: 50px" href="/3">Starred</a>
     <a style="float: left; margin-right: 50px" href="/4">Filter</a>
-</p>
-{% if current_user.is_authenticated %}
-<div style="position: fixed; top: 25px; right: 25px;">
-    <a style="margin-left: 25px;" class="navbar-brand" href="/logout">{{ current_user.name }}</a>
 </div>
-<div>
-    <a style="position: fixed; top: 25px; right: 150px;" class="navbar-brand" href="/profile">PROFILE</a>
+{% if current_user.is_authenticated %}
+<div style="position: fixed; top: 25px; right: 0px;" class="navbar-brand">
+    <a href="/add_product">Add product</a>
+    <a href="/profile"><img width="50px" height="50px"
+                            {% if current_user.avatar_name != None %}
+                            src="/static/images/users/{{ current_user.id }}/{{ current_user.avatar_name }}"
+                            {% else %}
+                            src="https://avatars.mds.yandex.net/get-pdb/1996600/d1725ec1-41d3-4b2c-ab24-91ec603557bf/s375"
+                            {% endif %}</a>
+    <a style="" href="/profile">{{ current_user.name }}</a>
+    <a style="right: 150px;" class="navbar-brand" href="/logout">LOGOUT</a>
 </div>
 {% else %}
 <p style="position: fixed; top: 25px; right: 25px;">

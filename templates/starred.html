@@ -1,3 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+{% if current_user.is_authenticated %}
+{% for i in products %}
+<h1><a href="/product/{{ i.id }}">{{ i.name }}</a></h1>
+{% endfor %}
+{% endif %}
 {% endblock %}
