@@ -1,5 +1,5 @@
 import flask
-from flask import render_template
+from flask import render_template, redirect, request
 from flask_login import current_user
 
 from data import db_session
@@ -37,9 +37,15 @@ def add_product():
                            form=form)
 
 
-@app.route('/delete_product')
-def delete_product():
-    pass
+@app.route('/delete_product/<int:product_id>', methods=['POST', 'GET'])
+def delete_product(product_id):
+    session = db_session.create_session()
+    product = session.query(Product).get(product_id)
+    if request.method == 'POST':
+        session.delete(product)
+        session.commit()
+        return redirect('/')
+    return render_template('delete_product.html', current_user=current_user)
 
 
 @app.route('/edit_product/<int:product_id>', methods=['POST', 'GET'])

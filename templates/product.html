@@ -15,6 +15,7 @@
 </form>
 {% if current_user.id == product.user_id %}
 <a class="btn btn-primary" href="/edit_product/{{ product.id }}">Edit product</a>
+<a class="btn btn-primary" href="/delete_product/{{ product.id }}">Delete product</a>
 {% endif %}
 {% endif %}
 {% endblock %}
