@@ -1,0 +1,18 @@
+.signing-form__changeMode {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #1F2232;
+    margin: 5px auto 20px;
+    cursor: pointer;
+}
+
+.signing-form__changeMode:hover {
+    opacity: .8;
+}

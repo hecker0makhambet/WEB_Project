@@ -1,0 +1,28 @@
+.signing-form__submitBtn {
+    width: 150px;
+    height: 40px;
+    color: white;
+    background: #EF476F;
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin: 20px 0 10px;
+    color: #FFFFFF;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.signing-form__submitBtn:hover {
+    background: #f15177;
+}
+
+@media screen and (max-width: 767px) {
+    .signing-form__submitBtn {
+        margin: 10px 0 10px;
+    }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The main purpose of the site is to help customers of the Erke toy store easily order a toy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tynyshtyq Darhan">
+    <title>Erke</title>
+    {% block head %} {% endblock %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pages/basepage.css') }}">
+    <link rel="icon" href="/static/images/dev/LogoErkeWhiteBack.svg">
+
+</head>
+
+<body class="main-page">
+    <div class="loader__overlay">
+        <img src="/static/images/dev/Spinner-0.6s-197px.svg" alt="loader" class="loader">
+    </div>
+    <header class="header">
+        <img class="navbar__menuBtn" src="/static/images/prog/blacknavbarmenu.svg" id="navbar__menuBtn" style="margin-right: 20px;"></img><h1 class="h1-heading-of-page erke" style="z-index: 101; color: #EF476F; margin: 10px 0;">Erke</h1>
+        <nav class="navbar">
+            <ul class="navbar__list">
+                <li class="navbar__elem"><a href="/" id="navbarMain" class="navbar__linktext">Main</a></li>
+                <li class="navbar__elem"><a href="/toys/" id="navbarToys" class="navbar__linktext">Toys</a></li>
+                <li class="navbar__elem"><a href="/shopping_cart/" id="navbarCart" class="navbar__linktext">Cart</a></li>
+                <li class="navbar__elem"><a href="/about_erke/" id="navbarAbout" class="navbar__linktext">About</a></li>
+                
+            </ul>
+            
+            <ul class="navbar__list">
+                {% if current_user.is_authenticated %}
+                <li class="navbar__elemico"><a href="/profile/" class="navbar__linkico" id="navbarAbout"><img {% if current_user.avatar_name != None %} src="/static/images/users/{{ current_user.user_name }}/{{ current_user.avatar_name }}" {% else %} src="/static/images/dev/test.png" {% endif %} alt="avatar" class="navbar__avatar"></a></li>
+                    <li class="navbar__elemico navbar__elem_show" id="likedDescktop"><a href="/liked/" class="navbar__linkico"><img src="/static/images/dev/pg_like.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/filled_like.svg" class="navbar__ico_hover" alt="loved"></a></li>
+                    
+                    <li class="navbar__elem navbar__elem_hide"><a href="/liked/" class="navbar__linktext" id="likedMobile">Liked</a></li>
+                    <li class="navbar__elem navbar__elem_hide"><a href="/logout/" class="navbar__linktext" >Log out</a></li>
+                    <li class="navbar__elemico navbar__elem_show" id="logoutDescktop"><a href="/logout/" class="navbar__linkico"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico_hover" alt="loved"></a></li>
+                {% else %}
+                    <li class="navbar__elemico"><a href="/signing/" class="navbar__linktext ">Sign up/in</a></li>  
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    {% block main %}
+
+    {% endblock %}
+
+    <footer class="footer">
+        <nav class="footerbar">
+            <p class="footerbar__p">© 2020 Darhan</p>
+            <ul class="footerbar__list">
+                <li class="footerbar__elem"><img src="/static/images/dev/phone.svg" class="footerbar__ico" alt=""><p class="footerbar__p">+7 747 917 61 07</p></li>
+                <li class="footerbar__elem"><img src="/static/images/dev/email.svg" class="footerbar__ico" alt=""><p class="footerbar__p">darhantynyshtyk4@gmail.com</p></li>
+                <li class="footerbar__elem"><img src="/static/images/dev/insta.svg" class="footerbar__ico" alt=""><p class="footerbar__p">erke.toystore</p></li>
+            </ul>
+            <p class="footerbar__p2">buy whatever you want</p>
+        </nav>
+    </footer>
+    
+    <template id="cardTemplate">
+        <div class="card">
+            <div class="card__image-wrapper">
+                <img src="/static/images/dev/testToyImg.svg" alt="ToyImage" class="card__image">
+            </div>
+            <div class="card__name-wrapper">
+                <p class="card__name"></p>
+            </div>
+
+            <div class="card__like-price-wrapper">
+                <p class="card__price"></p>
+                <button type="button" class="card__like"></button>
+            </div>
+            <div class="card__buttons-wrapper">
+                <button type="button" id="addCardBtn" class="card__button card__button_active">Add</button>
+                <a href="#" id="more" class="card__button">More</a>
+            </div>
+        </div>
+    </template>
+    
+    <template id="cartCardTemplate">
+        <div class="cartCard">
+            <button class="cartCard__remove"></button>
+            <div class="cartCard__image-wrapper">
+                <img src="" alt="ToyImage" class="cartCard__image">
+            </div>
+            
+            <div class="card__name-wrapper">
+                <p class="cartCard__name"></p>
+                <p class="cartCard__description"></p>
+            </div>
+            <div class="card__amount-wrapper">
+                <button class="cartCard__swither" id="cartCardMinus">-</button>
+                <input type="text" class="cartCard__amount" value="1" disabled>
+                <button class="cartCard__swither" id="cartCardPlus">+</button>
+            </div>
+            <div class="cartCard__price-wrapper">
+                <p class="cartCard__price"></p>
+            </div>
+        </div>
+    </template>
+
+    {% block script %}
+
+    {% endblock %}
+    <div class="popup" id="popupImg">
+        <div class="popup__img-container">
+            <button class="popup__close popup__close_add-n-open" type="button" id="closeImgBtn"></button>
+            <img src="#" alt="Картинка" class="popup__image">
+            <p class="popup__title"></p>
+            
+        </div>
+    </div>
+    
+    <script src="/static/scripts/pages/base.js"></script>
+</body>
+
+</html>

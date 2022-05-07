@@ -1,0 +1,17 @@
+.signing-form__input-error {
+    width: 100%;
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ff0000;
+    z-index: 100;
+}
+@media screen and (max-width: 767px) {
+    .signing-form__input-error {
+        font-size: 8px;
+    }
+}

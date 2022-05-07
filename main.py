@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_login import login_required, logout_user, current_user, LoginManager
+from flask_login import login_required, logout_user, current_user, LoginManager, login_user
 from flask_restful import Api
 
 import data
@@ -52,9 +52,10 @@ def about_foo(session):
 def starred_foo(session):
     b = []
     if current_user.is_authenticated:
+        user = session.query(User).get(current_user.id)
         products = session.query(Product).all()
         for i in products:
-            if i.id in current_user.starred:
+            if str(i.id) in user.starred.split():
                 b.append(i)
     return render_template('starred.html', current_user=current_user, products=b)
 
@@ -67,31 +68,48 @@ def filter_foo(session):
 def get_user(user_id):
     session = db_session.create_session()
     user = session.query(User).get(user_id)
+    params = {
+        'current_user': current_user,
+        'user': user
+    }
     if current_user != user:
         user_products = session.query(Product).filter(Product.is_private == False, Product.user == user)
+        params['products'] = user_products
     else:
         user_products = user.products
-    return render_template('user.html', current_user=current_user, user=user, products=user_products)
+        params['products'] = user_products
+    return render_template('user.html', **params)
+
+
+@app.route('/like/<int:product_id>', methods=['POST', 'GET', 'PUT'])
+def like(product_id):
+    session = db_session.create_session()
+    product = session.query(Product).get(product_id)
+    user = session.query(User).get(current_user.id)
+    user_starred = set(user.starred.split())
+    product_starred = set(product.starred.split())
+    if str(product_id) in user_starred and str(user.id) in product_starred:
+        user_starred.remove(str(product_id))
+        product_starred.remove(str(user.id))
+    else:
+        user_starred.add(str(product_id))
+        product_starred.add(str(user.id))
+    user.starred = ' '.join(list(user_starred))
+    product.starred = ' '.join(list(product_starred))
+    product.likes = len(product_starred)
+    session.commit()
+    logout_user()
+    login_user(user)
+    return redirect(f'/product/{product_id}')
 
 
 @app.route('/product/<int:product_id>', methods=['POST', 'GET'])
 def get_product(product_id):  # Вывод информации о продукте
     session = db_session.create_session()
     product = session.query(Product).get(product_id)
-    if request.method == 'POST':
-        user = session.query(User).get(current_user.id)
-        if product.id in user.starred and user.id in product.starred:
-            user.starred.remove(product.id)
-            product.starred.remove(user.id)
-        else:
-            user.starred.add(product.id)
-            product.starred.add(user.id)
-        product.likes = len(product.starred)
-        session.commit()
     return render_template('product.html', current_user=current_user, product=product)
 
 
-@app.route('/', methods=['POST', 'GET'])
 @app.route('/<int:action>', methods=['POST', 'GET'])  # Главная страница
 def main(action=1):
     session = db_session.create_session()
@@ -99,5 +117,10 @@ def main(action=1):
     return a[action]
 
 
+@app.route('/', methods=['POST', 'GET'])
+def welcome():
+    return render_template('welcome_page.html')
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5000, host='127.0.0.2')

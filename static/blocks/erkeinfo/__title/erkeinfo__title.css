@@ -1,0 +1,33 @@
+.erkeinfo__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 120px;
+    padding: 0;
+    color: #EF476F;
+
+    margin: 0 0 30px;
+}
+
+@media screen and (max-width: 1600px) {
+    .erkeinfo__title {
+        font-size: 100px;
+    }
+}
+  
+@media screen and (max-width: 1280px) {
+    .erkeinfo__title {
+        font-size: 80px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .erkeinfo__title {
+        font-size: 100px;
+        margin: 0;
+    }
+}

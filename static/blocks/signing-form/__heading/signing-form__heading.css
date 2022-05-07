@@ -1,0 +1,26 @@
+.signing-form__heading {
+    width: 100%;
+    margin: 15px auto 20px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 59px;
+    text-align: center;
+
+    color: #1F2232;
+}
+
+@media screen and (max-width: 1440px) {
+    .signing-form__heading {
+        margin: 10px auto 15px;
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .signing-form__heading {
+        margin: 10px auto 5px;
+        font-size: 24px;
+    }
+}

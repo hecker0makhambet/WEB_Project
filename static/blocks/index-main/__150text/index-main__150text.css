@@ -1,0 +1,19 @@
+.index-main__150text {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 150px;
+    line-height: 183px;
+    /* identical to box height */
+
+    transition: color .5s ease;
+    color: #1F2232;
+
+}
+
+.index-main__150text:hover {
+    color: #1F223286;
+}

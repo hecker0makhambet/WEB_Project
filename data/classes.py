@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, IntegerField, FileField
+from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, IntegerField, FileField,\
+    TextAreaField
 
 
 class LoginForm(FlaskForm):
@@ -20,7 +21,7 @@ class RegisterForm(FlaskForm):
 
 class ProductForm(FlaskForm):
     name = StringField('name', validators=[DataRequired()])
-    about = StringField('about', validators=[DataRequired()])
+    about = TextAreaField('about', validators=[DataRequired()])
     price = IntegerField('price(KZT)', validators=[DataRequired()])
     is_private = BooleanField('is_private')
     Avatar = FileField('Choose avatar')
@@ -34,7 +35,7 @@ class AvatarForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     name = StringField('Edit name')
-    about = StringField('Edit info about me')
+    about = TextAreaField('Edit info about me')
     email = EmailField('Edit email')
     submit = SubmitField('Save changes')
 
@@ -43,4 +44,12 @@ class PasswordChangeForm(FlaskForm):
     old_password = PasswordField('Old password', validators=[DataRequired()])
     new_password = PasswordField('New password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm password', validators=[DataRequired()])
+    submit = SubmitField('Save changes')
+
+
+class ProductEditForm(FlaskForm):
+    name = StringField('Edit name')
+    about = TextAreaField('Edit information')
+    price = IntegerField('Edit price')
+    is_private = BooleanField('Is private')
     submit = SubmitField('Save changes')

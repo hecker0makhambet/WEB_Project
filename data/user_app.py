@@ -28,7 +28,7 @@ def profile():  # Профиль текущего пользователя
     if user.avatar_name != None:
         url1 = url_for('static', filename=f'images/users/{user.id}/{user.avatar_name}')
     else:
-        url1 = "https://avatars.mds.yandex.net/get-pdb/1996600/d1725ec1-41d3-4b2c-ab24-91ec603557bf/s375"
+        url1 = url_for('static', filename=f'images/prog/s375.webp')
     if form2.is_submitted():
         if form.Avatar.data:
             mkdir('static\\images\\users', str(user.id))
@@ -46,7 +46,6 @@ def profile():  # Профиль текущего пользователя
         session.commit()
         logout_user()
         login_user(user)
-        # reload_user()
         return render_template('profile.html', current_user=current_user, user=user, url1=url1, form=form, form2=form2)
     if form.is_submitted():
 

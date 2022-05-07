@@ -1,0 +1,80 @@
+.circle {
+    position: fixed;
+    width: 1515px;
+    height: 1515px;
+    right: -800px;
+    top: -450px;
+    z-index: -10;
+}
+
+.balls {
+    position: fixed;
+    top: calc(100% - 310px);
+    left: 120px;
+    width: 235px;
+    height: 280px;
+    z-index: -10;
+}
+
+.train {
+    position: fixed;
+    top: 30px;
+    left: 200px;
+    transform: rotate(45deg);
+    width: 235px;
+    height: 280px;
+    z-index: -10;
+}
+
+@media screen and (max-width: 1600px) {
+    .circle {
+        width: 1200px;
+        height: 1200px;
+        right: -600px;
+        top: -300px;
+    }
+
+    .balls {
+        position: fixed;
+        top: calc(100% - 230px);
+        left: 60px;
+        width: 180px;
+        height: 200px;
+        z-index: -10;
+    }
+
+    .train {
+        position: fixed;
+        top: 30px;
+        left: 120px;
+        transform: rotate(45deg);
+        width: 180px;
+        height: 200px;
+        z-index: -10;
+    }
+
+}
+
+@media screen and (max-width: 1280px) {
+    .circle {
+        width: 1000px;
+        height: 1000px;
+        right: -500px;
+        top: -150px;
+    }
+
+    .balls {
+        display: none;
+    }
+
+    .train {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .circle {
+        display: none;
+    }
+}

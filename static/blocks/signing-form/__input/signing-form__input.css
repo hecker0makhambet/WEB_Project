@@ -1,0 +1,27 @@
+.signing-form__input {
+    width: 100%;
+    margin: 0;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #1f1f1f;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    height: 40px;
+    outline: none;
+    padding-left: 15px;
+
+}
+
+.signing-form__input:focus {
+    box-shadow: 0 0 3px #1f22328c;
+}
+
+@media screen and (max-width: 767px) {
+    .signing-form__input {
+        height: 30px;
+    }
+}

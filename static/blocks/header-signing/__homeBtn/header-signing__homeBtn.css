@@ -1,0 +1,16 @@
+.header-signing__homeBtn {
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    background-image: url(../../../images/dev/homeBtn.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 30px 60px 0 0;
+    cursor: pointer;
+}
+
+.header-signing__homeBtn:hover {
+    opacity: .9;
+}
+

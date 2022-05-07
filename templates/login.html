@@ -1,28 +1,73 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Authorisation</h1>
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.email.label }}<br>
-        {{ form.email() }}<br>
-        {% for error in form.email.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="The main purpose of the site is to help customers of the Erke toy store easily order a toy">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tynyshtyq Darhan">
+    <title>Signing</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/pages/signing.css">
+    <link rel="icon" href="../static/images/prog/LogoErkeWhiteBack.svg">
+</head>
+
+<body class="signing-page">
+    <noscript>
+        <div style="position: fixed; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: white; z-index: 1000;">
+            <p style="font-size: 36px;">Подключите JS, чтобы сайт функционировал!</p>
+        </div>
+    </noscript>
+    <div class="loader__overlay">
+        <img src="../static/images/prog/Spinner-0.6s-197px.svg" alt="loader" class="loader">
+    </div>
+
+    <img src="../static/images/prog/signing_circle.svg" alt="circle" class="circle">
+    <img src="../static/images/prog/balls.svg" alt="balls" class="balls">
+    <img src="../static/images/prog/train.svg" alt="train" class="train">
+    <header class="header-signing">
+        <a href="/" class="header-signing__homeBtn"></a>
+    </header>
+
+    <main class="main-signing">
+        <div class="form-block">
+            <!-- form  -->
+            <form action="" class="signing-form signing-form_active" id="signin-form" enctype="multipart/form-data" method="POST">
+                <h2 class="signing-form__heading">Sign in</h2>
+
+                <div class="signing-form__input-container">
+                    <label class="signing-form__label" for="signinusername">Email</label>
+                    <input type="email" class="signing-form__input" name="email" id="signinusername" required minlength="2" maxlength="40" autocomplete="off">
+                    <p id="signinusername-error" class="signing-form__input-error"></p>
+                </div>
+
+                <div class="signing-form__input-container">
+                    <label class="signing-form__label" for="signinpassword">Password</label>
+                    <input type="password" class="signing-form__input" name="password" id="signinpassword" required minlength="8" maxlength="40">
+                    <p id="signinpassword-error" class="signing-form__input-error"></p>
+                </div>
+                <a>{{ message }}</a>
+
+                <button type="submit" class="signing-form__submitBtn">Go</button>
+
+                <a class="signing-form__changeMode" id="signinFormChanger" href="/register">Do not have an account?</a>
+
+            </form>
+        </div>
+
+        <div class="erkeinfo">
+            <h1 class="erkeinfo__title">Erke</h1>
+            <p class="erkeinfo__subtitle">Erke is a toy store founded in 2012 and still operating today. Erke offers only original products. All toys are certified and obtained from licensed suppliers.</p>
+
+            <div class="erkeinfo__footer">
+                <a class="erkeinfo__footertext" target="_blank" href="https://www.instagram.com/d1tch4/">Darhan</a>
+                <p class="erkeinfo__footertext">2022, Uralsk</p>
             </div>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password() }}<br>
-        {% for error in form.password.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-        {% endfor %}
-    </p>
-    <p>{{ form.remember_me() }} {{ form.remember_me.label }}
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}
-    <p>{{ message }}</p>
-</form>
-{% endblock %}
+        </div>
+
+    </main>
+</body>
+</html>

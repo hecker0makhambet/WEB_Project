@@ -1,0 +1,233 @@
+.cartCards {
+    margin: 10px 0 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.cartForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartForm__input {
+    width: 300px;
+    margin: 10px 0;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid #1f1f1f;
+    padding-left: 15px;
+}
+
+.cartForm__button {
+    background-color: #EF476F;
+    color: white;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.cartCard {
+    margin: 0 0 40px;
+    width: 100%;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cartCard__remove {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0 20px;
+    padding: 0;
+    background: none;
+    background-image: url(/static/images/dev/remove.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    outline: 0;
+}
+
+.cartCard__image-wrapper {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    margin: 10px 20px 10px 0;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.cartCard__image {
+    width: 100%;
+    height: 100%;
+}
+
+.card__name-wrapper {
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    height: 80%;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1F2232;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.cartCard__description {
+    font-size: 13px;
+    line-height: 0;
+    color: #1f223294;
+    margin: 0;
+    padding: 0;
+}
+
+.cartCard__name {
+    border: 0;
+    margin: 0 0 5px;
+    padding: 0;
+}
+
+.cartCard__price-wrapper {
+    justify-self: flex-end;
+    margin: 0 0 0 auto;
+    width: 180px;
+    height: 100%;
+    background: #EF476F;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.cartCard__price {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}
+
+.card__amount-wrapper {
+    width: 80px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartCard__swither {
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background: #EAE9E9;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cartCard__swither:hover {
+    background: #EF476F;
+    color: white;
+}
+
+.cartCard__amount {
+    text-align: center;
+    width: 50px;
+    border: 0;
+    outline: 0;
+    background: 0;
+    font-size: 16px;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 1023px) {
+    .card__name-wrapper {
+        width: 300px;
+    }
+
+    .cartCard__price-wrapper {
+        width: 120px;
+        height: 100%;
+    }
+    .cartCard__price {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .cartCard {
+        margin: 0 auto 40px;
+        width: 70%;
+        border-radius: 10px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .cartCard__remove {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        height: 20px;
+        width: 20px;
+    }
+    .cartCard__image-wrapper {
+        margin: 20px 0 0;
+        width: 180px;
+        height: 180px;
+    }
+    .card__name-wrapper {
+        width: 100%;
+    }
+    .cartCard__name {
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+    }
+
+    .cartCard__description {
+        width: 80%;
+        margin: 10px auto 20px;
+        text-align: center;
+    }
+
+    .cartCard__price-wrapper {
+        width: 100%;
+        height: 100%;
+        margin: 20px 0 0;
+        background: #EF476F;
+        border-radius: 0px 0 10px 10px;
+    }
+}

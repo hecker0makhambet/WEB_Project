@@ -1,0 +1,30 @@
+.signing-form {
+    width: 450px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 20px rgb(0, 0, 0, 0.6);
+    margin: 0 10px;
+}
+
+@media screen and (max-width: 1440px) {
+    .signing-form {
+        width: 450px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .signing-form {
+        width: 375px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .signing-form {
+        margin: 0 20px;
+    }
+}

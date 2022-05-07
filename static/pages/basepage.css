@@ -1,0 +1,16 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
+@import url(../blocks/main-page/main-page.css);
+@import url(../blocks/base/base.css);
+@import url(../blocks/loader/loader.css);
+@import url(../blocks/loader/__overlay/loader__overlay.css);
+@import url(../blocks/loader/_active/loader_active.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__heading/popup__heading.css);
+@import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__close/_add-n-open/popup__close_add-n-open.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__img-container/popup__img-container.css);
+@import url(../blocks/popup/__image/popup__image.css);
