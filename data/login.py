@@ -6,10 +6,10 @@ from data import db_session
 from data.classes import LoginForm, RegisterForm
 from data.users import User
 
-app = flask.Blueprint('blueprints', __name__, template_folder='templates')
+login_app = flask.Blueprint('blueprints', __name__, template_folder='templates')
 
 
-@app.route('/login', methods=['POST', 'GET'])  # Вход
+@login_app.route('/login', methods=['POST', 'GET'])  # Вход
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -24,7 +24,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/register', methods=['POST', 'GET'])
+@login_app.route('/register', methods=['POST', 'GET'])
 def register():  # Регистрация
     form = RegisterForm()
     if form.validate_on_submit():

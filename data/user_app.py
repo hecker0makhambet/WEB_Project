@@ -1,21 +1,14 @@
-import flask
-import sys
 import os
-from flask import Flask, render_template, request, redirect, jsonify, make_response, url_for
-from flask_restful import Api
-from data.db_session import create_session, global_init
-from data import products_resource
-from data import db_session
-from data.users import User
-from data.products import Product
-from flask_login import login_required, logout_user, current_user, login_user, LoginManager
-from flask_wtf import FlaskForm
-from wtforms.validators import DataRequired
-from wtforms import StringField, EmailField, PasswordField, SubmitField, BooleanField, IntegerField, FileField
-from data.classes import LoginForm, RegisterForm, ProductForm, ProfileForm, AvatarForm, PasswordChangeForm
-from werkzeug.security import generate_password_hash, check_password_hash
 
-app = flask.Blueprint('blueprints', __name__, template_folder='templates')
+import flask
+from flask import render_template, url_for
+from flask_login import logout_user, current_user, login_user
+
+from data import db_session
+from data.classes import ProfileForm, AvatarForm, PasswordChangeForm
+from data.users import User
+
+user_app = flask.Blueprint('blueprints', __name__, template_folder='templates')
 
 
 def mkdir(path, direct):
@@ -26,7 +19,7 @@ def mkdir(path, direct):
     os.mkdir(path)
 
 
-@app.route('/profile', methods=['POST', 'GET'])
+@user_app.route('/profile', methods=['POST', 'GET'])
 def profile():  # Профиль текущего пользователя
     form = AvatarForm()
     form2 = ProfileForm()
@@ -61,7 +54,7 @@ def profile():  # Профиль текущего пользователя
     return render_template('profile.html', current_user=current_user, user=user, url1=url1, form=form, form2=form2)
 
 
-@app.route('/change_password', methods=['POST', 'GET'])
+@user_app.route('/change_password', methods=['POST', 'GET'])
 def change_password():
     form = PasswordChangeForm()
     session = db_session.create_session()
