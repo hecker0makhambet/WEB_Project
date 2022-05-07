@@ -46,3 +46,8 @@ def add_product():
 @app.route('/delete_product')
 def delete_product():
     pass
+
+
+@app.route('/edit_product')
+def edit_product():
+    pass

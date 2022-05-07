@@ -20,7 +20,7 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     avatar_name = sqlalchemy.Column(sqlalchemy.String, default=None)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
-    starred = []
+    starred = set()
 
     products = orm.relation("Product", back_populates='user')
 

@@ -68,10 +68,10 @@ def get_user(user_id):
     session = db_session.create_session()
     user = session.query(User).get(user_id)
     if current_user != user:
-        products = session.query(Product).filter(Product.is_private == False, Product.user == current_user)
+        user_products = session.query(Product).filter(Product.is_private == False, Product.user == user)
     else:
-        products = user.products
-    return render_template('user.html', current_user=current_user, user=user, products=products)
+        user_products = user.products
+    return render_template('user.html', current_user=current_user, user=user, products=user_products)
 
 
 @app.route('/product/<int:product_id>', methods=['POST', 'GET'])
@@ -80,20 +80,12 @@ def get_product(product_id):  # Вывод информации о продук�
     product = session.query(Product).get(product_id)
     if request.method == 'POST':
         user = session.query(User).get(current_user.id)
-        print(user.name)
-        for i in session.query(User):
-            print(i.name, i.starred)
-        print(000)
         if product.id in user.starred and user.id in product.starred:
-            user.starred.pop(user.starred.index(product.id))
-            product.starred.pop(product.starred.index(user.id))
+            user.starred.remove(product.id)
+            product.starred.remove(user.id)
         else:
-            user.starred.append(product.id)
-            product.starred.append(user.id)
-            user.starred = set(user.starred)
-            user.starred = list(user.starred)
-            product.starred = set(product.starred)
-            product.starred = list(product.starred)
+            user.starred.add(product.id)
+            product.starred.add(user.id)
         product.likes = len(product.starred)
         session.commit()
     return render_template('product.html', current_user=current_user, product=product)
