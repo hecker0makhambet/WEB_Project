@@ -1,9 +1,9 @@
-from . import db_session
-from .products import Product
-from .users import User
-from flask_restful import abort, Resource, reqparse
 from flask import jsonify
-from .products_parser import parser
+from flask_restful import abort, Resource
+
+from data import db_session
+from data.products import Product
+from data.products_parser import parser
 
 
 def if_product_not_found(id):

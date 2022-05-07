@@ -8,7 +8,7 @@ from data import db_session
 from data.classes import ProfileForm, AvatarForm, PasswordChangeForm
 from data.users import User
 
-user_app = flask.Blueprint('blueprints', __name__, template_folder='templates')
+app = flask.Blueprint('user_blueprint', __name__, template_folder='templates')
 
 
 def mkdir(path, direct):
@@ -19,7 +19,7 @@ def mkdir(path, direct):
     os.mkdir(path)
 
 
-@user_app.route('/profile', methods=['POST', 'GET'])
+@app.route('/profile', methods=['POST', 'GET'])
 def profile():  # Профиль текущего пользователя
     form = AvatarForm()
     form2 = ProfileForm()
@@ -54,7 +54,7 @@ def profile():  # Профиль текущего пользователя
     return render_template('profile.html', current_user=current_user, user=user, url1=url1, form=form, form2=form2)
 
 
-@user_app.route('/change_password', methods=['POST', 'GET'])
+@app.route('/change_password', methods=['POST', 'GET'])
 def change_password():
     form = PasswordChangeForm()
     session = db_session.create_session()

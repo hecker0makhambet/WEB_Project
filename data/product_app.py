@@ -7,10 +7,10 @@ from data.classes import ProductForm
 from data.products import Product
 from data.user_app import mkdir
 
-product_app = flask.Blueprint('blueprints', __name__, template_folder='templates')
+app = flask.Blueprint('product_blueprint', __name__, template_folder='templates')
 
 
-@product_app.route('/add_product', methods=['POST', 'GET'])
+@app.route('/add_product', methods=['POST', 'GET'])
 def add_product():
     form = ProductForm()
     if form.is_submitted():
@@ -37,11 +37,11 @@ def add_product():
                            form=form)
 
 
-@product_app.route('/delete_product')
+@app.route('/delete_product')
 def delete_product():
     pass
 
 
-@product_app.route('/edit_product')
+@app.route('/edit_product')
 def edit_product():
     pass
