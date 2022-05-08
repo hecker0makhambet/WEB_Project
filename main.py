@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for
 from flask_login import login_required, logout_user, current_user, LoginManager, login_user
 from flask_restful import Api
 
 import data
 from data import login, user_app, product_app
-from data import products_resource, db_session
+from data import products_resource, db_session, users_resource
 from data.db_session import create_session, global_init
 from data.products import Product
 from data.users import User
@@ -19,8 +19,10 @@ app.register_blueprint(data.login.app, name='1')
 app.register_blueprint(data.product_app.app, name='2')
 app.register_blueprint(data.user_app.app, name='3')
 api = Api(app)
-api.add_resource(products_resource.ProductResource, '/api/<int:product_id>')
-api.add_resource(products_resource.ProductListResource, '/api/')
+api.add_resource(products_resource.ProductResource, '/api/products/<int:product_id>')
+api.add_resource(products_resource.ProductListResource, '/api/products/')
+api.add_resource(users_resource.UserResource, '/api/users/<int:user_id>')
+api.add_resource(users_resource.UserListResource, '/api/users/')
 
 
 def reload_user():
