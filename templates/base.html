@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='pages/basepage.css') }}">
     <link rel="icon" href="/static/images/dev/LogoErkeWhiteBack.svg">
+    <link rel="stylesheet" href="/static/pages/about.css">
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -57,8 +58,7 @@
         </nav>
     </header>
 
-
-{% block content %}{% endblock %}
+<div>{% block content %}{% endblock %}</div>
 <footer class="footer">
         <nav class="footerbar">
             <p class="footerbar__p">© 2020 Darhan</p>

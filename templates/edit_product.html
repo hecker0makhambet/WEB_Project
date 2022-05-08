@@ -1,15 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="post" enctype="multipart/form-data">
-    {{ form.name.label }}
-    {{ form.name(placeholder=product.name) }}<br>
-    {{ form.about.label }}
-    {{ form.about(placeholder=product.about) }}<br>
-    {{ form.price.label }}
-    {{ form.price(placeholder=product.price) }}<br>
-    {{ form.is_private.label }}
-    {{ form.is_private(placeholder=product.is_private) }}<br>
-    {{ form.submit(type="submit", class="btn btn-primary") }}
-    <a class="alert alert-dark">{{ message }}</a>
+<form action="" method="post" enctype="multipart/form-data" style="width: 1000px; margin: 100px; border-width: 5px;">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        {{ form.name(class="form-control", placeholder=product.name) }}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">About</label>
+        {{ form.about(class="form-control", placeholder=product.about) }}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        {{ form.price(class="form-control", placeholder=product.price) }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.is_private(class="form-check-input") }}
+        <label class="form-label">Is private</label>
+    </div>
+    {{ form.submit(type="submit", class="btn btn-primary") }}<br>
+    <div class="alert alert-dark">{{ message }}</div>
 </form>
 {% endblock %}

@@ -1,21 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-<img {% if product.avatar_name != None %} src="/static/images/products/{{ product.id }}/{{ product.avatar_name }}"
+<div style="" class="main">
+    <div>
+    <img {% if product.avatar_name != None %} src="/static/images/products/{{ product.id }}/{{ product.avatar_name }}"
      {% else %} src="data:image/jpeg;base64,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"
-     {% endif %}>
-<h1>{{ product.name }}</h1>
-<p>{{ product.about }}</p>
-<a href="/user/{{ product.user.id }}">{{ product.user.name }}</a>
-<p>{{ product.price }}</p>
-<p>{{ product.date }}</p>
-<p>likes: {{ product.likes }}</p>
-{% if current_user.is_authenticated %}
-<form action="/like/{{ product.id }}" method="post">
-<button type="submit">Like</button>
-</form>
-{% if current_user.id == product.user_id %}
-<a class="btn btn-primary" href="/edit_product/{{ product.id }}">Edit product</a>
-<a class="btn btn-primary" href="/delete_product/{{ product.id }}">Delete product</a>
-{% endif %}
+         {% endif %} style="margin-bottom: 15px;"></div>
+    <div class="alert alert-primary">Name: {{ product.name }}</div>
+    <div class="alert alert-secondary">About: {{ product.about }}</div>
+    <div class="alert alert-success">User: <a class="alert" href="/user/{{ product.user.id }}">{{ product.user.name }}</a></div>
+    <div class="alert alert-danger">Price: {{ product.price }} KZT</div>
+    <div class="alert alert-warning">Date: {{ product.date }}</div>
+    <div class="alert alert-info">Likes: {{ product.likes }}
+    {% if current_user.is_authenticated %}
+    <div>
+        <form action="/like/{{ product.id }}" method="post">
+        <button class="btn btn-alert btn-danger" type="submit">Like</button>
+        </form>
+    </div>
+    {% endif %}</div>
+    {% if product.is_private %}
+    <div class="alert alert-dark">Private</div>
+    {% else %}
+    <div class="alert alert-success">Public</div>
+    {% endif %}
+
+</div>
+{% if current_user.id == product.user_id and current_user.is_authenticated %}
+<div class="alert">
+    <a class="btn btn-primary" href="/edit_product/{{ product.id }}">Edit product</a>
+    <a class="btn btn-primary" href="/delete_product/{{ product.id }}">Delete product</a>
+</div>
 {% endif %}
 {% endblock %}
