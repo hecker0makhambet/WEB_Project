@@ -40,8 +40,7 @@ def add_product():
                 r.close()
             product.avatar_name = form.Avatar.data.filename
         session.commit()
-        return render_template('add_product.html', current_user=current_user,
-                               form=form, product=product)
+        return redirect('/1')
     return render_template('add_product.html', current_user=current_user,
                            form=form)
 
