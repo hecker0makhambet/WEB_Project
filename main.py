@@ -42,6 +42,7 @@ def load_user(user_id):
 
 def products_foo(session):
     products = session.query(Product).filter(Product.is_private == False).all()
+    products.reverse()
     return render_template('main.html', current_user=current_user, products=products, url_for=url_for)
 
 
@@ -57,6 +58,7 @@ def starred_foo(session):
         for i in products:
             if str(i.id) in user.starred.split():
                 b.append(i)
+    b.reverse()
     return render_template('starred.html', current_user=current_user, products=b)
 
 
