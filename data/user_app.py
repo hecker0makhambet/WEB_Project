@@ -25,7 +25,7 @@ def profile():  # Профиль текущего пользователя
     form2 = ProfileForm()
     session = db_session.create_session()
     user = session.query(User).get(current_user.id)
-    if user.avatar_name != None:
+    if user.avatar_name:
         url1 = url_for('static', filename=f'images/users/{user.id}/{user.avatar_name}')
     else:
         url1 = url_for('static', filename=f'images/prog/s375.webp')

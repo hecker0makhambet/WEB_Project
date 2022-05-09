@@ -10,7 +10,7 @@ def if_user_not_found(user_id):
     session = db_session.create_session()
     a = session.query(User).get(user_id)
     if not a:
-        abort(404, message=f"Product {id} not found")
+        abort(404, message=f"Product {user_id} not found")
 
 
 class UserResource(Resource):

@@ -13,15 +13,6 @@ app = flask.Blueprint('product_blueprint', __name__, template_folder='templates'
 @app.route('/add_product', methods=['POST', 'GET'])
 def add_product():
     form = ProductForm()
-    # if request.method == 'POST':
-    #     print(0)
-    #     print(request.form['AvatarFile'])
-    #     print(request.form['Name'])
-    #     print(request.form['About'])
-    #     print(request.form['Price'])
-    #     print(request.form['is_private'])
-    #     return render_template('add_product.html', current_user=current_user,
-    #                        form=form)
     if form.is_submitted():
         session = db_session.create_session()
         product = Product(

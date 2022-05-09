@@ -6,11 +6,11 @@ from data.products import Product
 from data.products_parser import parser
 
 
-def if_product_not_found(id):
+def if_product_not_found(product_id):
     session = db_session.create_session()
-    a = session.query(Product).get(id)
+    a = session.query(Product).get(product_id)
     if not a:
-        abort(404, message=f"Product {id} not found")
+        abort(404, message=f"Product {product_id} not found")
 
 
 class ProductResource(Resource):

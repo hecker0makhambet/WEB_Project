@@ -38,21 +38,3 @@ def register():  # Регистрация
         login_user(user)
         return redirect('/')
     return render_template('register.html')
-    form = RegisterForm()
-    if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        e_mail = db_sess.query(User).filter(User.email == form.email.data).first()
-        if e_mail:
-            return render_template('register.html',
-                                   message="Email уже зарегистрирован",
-                                   form=form)
-        if form.password.data != form.confirm_password.data:
-            return render_template('register.html',
-                                   message="Пароли не совпадают",
-                                   form=form)
-        user = User(name=form.name.data, email=form.email.data)
-        user.set_password(form.password.data)
-        db_sess.add(user)
-        db_sess.commit()
-        return redirect('/login')
-    return render_template('register.html', form=form)
