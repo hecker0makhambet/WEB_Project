@@ -34,22 +34,22 @@
         <img class="navbar__menuBtn" src="/static/images/prog/blacknavbarmenu.svg" id="navbar__menuBtn" style="margin-right: 20px;"></img><h1 class="h1-heading-of-page erke" style="z-index: 101; color: #EF476F; margin: 10px 0;">Erke</h1>
         <nav class="navbar">
             <ul class="navbar__list">
-                <li class="navbar__elem"><a href="/1" id="navbarMain" class="navbar__linktext">Products</a></li>
-                <li class="navbar__elem"><a href="/2" id="navbarToys" class="navbar__linktext">About</a></li>
-                <li class="navbar__elem"><a href="/3" id="navbarCart" class="navbar__linktext">Starred</a></li>
-                <li class="navbar__elem"><a href="/add_product" id="navbarAbout" class="navbar__linktext">New product</a></li>
-                <li class="navbar__elem"><a href="https://web.telegram.org/z/#5192637273" id="navbarCart" class="navbar__linktext">BOT</a></li>
+                <li class="navbar__elem"><a href="/1" class="navbar__linktext">Products</a></li>
+                <li class="navbar__elem"><a href="/2" class="navbar__linktext">About</a></li>
+                <li class="navbar__elem"><a href="/3" class="navbar__linktext">Starred</a></li>
+                <li class="navbar__elem"><a href="/add_product" class="navbar__linktext">New product</a></li>
+                <li class="navbar__elem"><a href="https://web.telegram.org/z/#5192637273" class="navbar__linktext">BOT</a></li>
 
             </ul>
 
             <ul class="navbar__list">
                 {% if current_user.is_authenticated %}
-                <li class="navbar__elemico"><a href="/profile" class="navbar__linkico" id="navbarAbout"><img {% if current_user.avatar_name != None %} src="/static/images/users/{{ current_user.id }}/{{ current_user.avatar_name }}" {% else %} src="/static/images/dev/test.png" {% endif %} alt="avatar" class="navbar__avatar"></a></li>
-                    <li class="navbar__elemico navbar__elem_show" id="likedDescktop"><a href="/3" class="navbar__linkico"><img src="/static/images/dev/pg_like.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/filled_like.svg" class="navbar__ico_hover" alt="loved"></a></li>
+                <li class="navbar__elemico"><a href="/profile" class="navbar__linkico"><img {% if current_user.avatar_name != None %} src="/static/images/users/{{ current_user.id }}/{{ current_user.avatar_name }}" {% else %} src="/static/images/dev/test.png" {% endif %} alt="avatar" class="navbar__avatar"></a></li>
+                    <li class="navbar__elemico navbar__elem_show"><a href="/3" class="navbar__linkico"><img src="/static/images/dev/pg_like.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/filled_like.svg" class="navbar__ico_hover" alt="loved"></a></li>
 
-                    <li class="navbar__elem navbar__elem_hide"><a href="/3" class="navbar__linktext" id="likedMobile">Liked</a></li>
+                    <li class="navbar__elem navbar__elem_hide"><a href="/3" class="navbar__linktext">Liked</a></li>
                     <li class="navbar__elem navbar__elem_hide"><a href="/logout" class="navbar__linktext" >Log out</a></li>
-                    <li class="navbar__elemico navbar__elem_show" id="logoutDescktop"><a href="/logout" class="navbar__linkico"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico_hover" alt="loved"></a></li>
+                    <li class="navbar__elemico navbar__elem_show"><a href="/logout" class="navbar__linkico"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico" alt="loved"><img src="/static/images/dev/pg_profile.svg" class="navbar__ico_hover" alt="loved"></a></li>
                 {% else %}
                     <li class="navbar__elemico"><a href="/register" class="navbar__linktext ">Sign up/</a>
                         <a href="/login" class="navbar__linktext ">Sign in</a></li>
